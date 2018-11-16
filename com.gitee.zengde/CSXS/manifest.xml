@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ExtensionManifest Version="4.0" ExtensionBundleId="com.gitee.zengde" ExtensionBundleVersion="2.0.2"
+		ExtensionBundleName="ZM翻译 1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		<Author><![CDATA[Cas Lemmens]]></Author>
+		<Contact mailto="zengde@gitee.com"/>
+		<Abstract href="https://gitee.com/zengde">
+    <![CDATA[Kaku will translate text layers in your Photoshop document to a language of your choosing.<br/>Once Kaku is installed, it can be found at Window > Extensions > Kaku.]]>
+  </Abstract>
+	<ExtensionList>
+		<Extension Id="com.gitee.zengde.panel" Version="2.0.2" />
+	</ExtensionList>
+	<ExecutionEnvironment>
+		<HostList>
+			<Host Name="PHXS" Version="15.0" />
+			<Host Name="PHSP" Version="15.0" />
+		</HostList>
+		<LocaleList>
+			<Locale Code="All" />
+		</LocaleList>
+		<RequiredRuntimeList>
+			<RequiredRuntime Name="CSXS" Version="5.0" />
+		</RequiredRuntimeList>
+	</ExecutionEnvironment>
+	<DispatchInfoList>
+		<Extension Id="com.gitee.zengde.panel">
+			<DispatchInfo >
+				<Resources>
+				<MainPath>./index.html</MainPath>
+				<ScriptPath>./host/PHXS.jsx</ScriptPath>
+				</Resources>
+				<Lifecycle>
+					<AutoVisible>true</AutoVisible>
+				</Lifecycle>
+				<UI>
+					<Type>Panel</Type>
+					<Menu>ZM翻译</Menu>
+					<Geometry>
+						<Size>
+							<Height>350</Height>
+							<Width>200</Width>
+						</Size>
+					</Geometry>
+					<Icons>
+            <Icon Type="Normal">./images/icon_light.png</Icon>
+            <Icon Type="RollOver">./images/icon_light.png</Icon>
+            <Icon Type="DarkNormal">./images/icon_dark.png</Icon>
+            <Icon Type="DarkRollOver">./images/icon_dark.png</Icon>
+          </Icons>
+				</UI>
+			</DispatchInfo>
+		</Extension>
+	</DispatchInfoList>
+</ExtensionManifest>

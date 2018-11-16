@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" id="kaku_style" href="./stylesheets/screen.css">
+
+	<title>ZM翻译</title>
+</head>
+
+<!-- <body class="dark" onLoad="onLoaded()"> -->
+<body class="dark">
+  <div id="loading" class="centered">
+    <p>加载中...</p>
+  </div>
+  <div id="offline" class="centered">
+    <p>ZM翻译无法连接网络</p>
+    <button id="offline_help">帮助我</button>
+  </div>
+  <div id="main">
+    <div id="header">
+      <h1>ZM翻译</h1>
+        <p class="meta">ZM翻译 1.0<br/>翻译支持 by 腾讯Ai/百度Ai</p>
+    </div>
+    <div id="form">
+		<p><label>翻译模式:</label></p>
+		<p>
+			<input type='radio' value='0' name='type_language'>所有文本图层</input>
+		</p>
+		<p>
+			<input type='radio' checked value='1' name='type_language'>当前图层</input>
+		</p>
+		<p><label>翻译引擎</label></p>
+		<p>
+			<select id="trans_engine">
+				<option value='baidu' selected="selected" >百度</option>
+				<option value='qq'>QQ</option>
+			</select>
+		</p>
+		<div class="engine_form qq_form" style='display:none;'>
+		  <p><label>翻译类型:</label></p>
+		  <p>
+			<select id="from_language">
+				<option value='0'>自动识别（中英文互转）</option>
+				<option value='1'>中文=>英文</option>
+				<option value='3'>中文=>西班牙文</option>
+				<option value='5'>中文=>法文</option>
+				<option value='9'>中文=>粤语</option>
+				<option value='11'>中文=>韩文</option>
+				<option value='15'>中文=>日文</option>
+				<option value='2'>英文=>中文</option>
+				<option value='4'>西班牙文=>中文</option>
+				<option value='6'>法文=>中文</option>
+				<option value='10'>粤语=>中文</option>
+				<option value='16'>日文=>中文</option>
+				<option value='7'>英文=>越南语</option>
+				<option value='8'>越南语=>英文</option>
+				<option value='13'>英文=>德语</option>
+				<option value='14'>德语=>英文</option>
+			</select>
+		  </p>
+		</div>
+		<div class="engine_form baidu_form">
+			<p><label>源语种:</label></p>
+			<p>
+				<select id="from_baidu_language">
+					<option value='auto'>自动检测</option>
+					<option value='zh'>中文</option>
+					<option value='en'>英语</option>
+					<option value='yue'>粤语</option>
+					<option value='wyw'>文言文</option>
+					<option value='jp'>日语</option>
+					<option value='kor'>韩语</option>
+					<option value='fra'>法语</option>
+					<option value='spa'>西班语</option>
+					<option value='th'>泰语</option>
+					<option value='ara'>阿拉伯语</option>
+					<option value='ru'>俄语</option>
+					<option value='pt'>葡萄牙语</option>
+					<option value='de'>德语</option>
+					<option value='it'>意大利语</option>
+					<option value='el'>希腊语</option>
+					<option value='nl'>荷兰语</option>
+					<option value='pl'>波兰语</option>
+					<option value='bul'>保加利亚语</option>
+					<option value='est'>爱沙尼亚语</option>
+					<option value='dan'>丹麦语</option>
+					<option value='fin'>芬兰语</option>
+					<option value='cs'>捷克语</option>
+					<option value='rom'>罗马尼亚语</option>
+					<option value='slo'>斯洛文尼亚语</option>
+					<option value='swe'>瑞典语</option>
+					<option value='hu'>匈牙利语</option>
+					<option value='cht'>繁体中文</option>
+					<option value='vie'>越南语</option>
+				</select>
+			</p>
+			<p><label>目标语种:</label></p>
+			<p>
+				<select id="to_baidu_language">
+					<option value='zh'>中文</option>
+					<option value='en'>英语</option>
+					<option value='yue'>粤语</option>
+					<option value='wyw'>文言文</option>
+					<option value='jp'>日语</option>
+					<option value='kor'>韩语</option>
+					<option value='fra'>法语</option>
+					<option value='spa'>西班语</option>
+					<option value='th'>泰语</option>
+					<option value='ara'>阿拉伯语</option>
+					<option value='ru'>俄语</option>
+					<option value='pt'>葡萄牙语</option>
+					<option value='de'>德语</option>
+					<option value='it'>意大利语</option>
+					<option value='el'>希腊语</option>
+					<option value='nl'>荷兰语</option>
+					<option value='pl'>波兰语</option>
+					<option value='bul'>保加利亚语</option>
+					<option value='est'>爱沙尼亚语</option>
+					<option value='dan'>丹麦语</option>
+					<option value='fin'>芬兰语</option>
+					<option value='cs'>捷克语</option>
+					<option value='rom'>罗马尼亚语</option>
+					<option value='slo'>斯洛文尼亚语</option>
+					<option value='swe'>瑞典语</option>
+					<option value='hu'>匈牙利语</option>
+					<option value='cht'>繁体中文</option>
+					<option value='vie'>越南语</option>
+				</select>
+			</p>
+		</div>
+	  
+      <p class="form"><button id="translate">开始翻译</button></p>
+    </div>
+    <p class="help"> 帮助文本</p>
+  </div>
+</body>
+<script src="./ext.js"></script>
+<script src="./lib/CSInterface-4.0.0.js"></script>
+<script src="./lib/jquery-1.9.1.js"></script>
+<script src="./lib//jquery-simple-combobox/js/jquery.easing.min.js"></script>
+<script src="./lib//jquery-simple-combobox/js/jquery.scombobox.min.js"></script>
+<script src="./main-full.js"></script>
+</html>

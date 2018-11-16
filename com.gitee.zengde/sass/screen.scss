@@ -1,0 +1,376 @@
+@import "compass/css3";
+@import "compass/css3/user-interface";
+@import "../lib/jquery-simple-combobox/css/jquery.scombobox.min.css";
+
+$font-size: 11px;
+$font-family: "Helvetica Neue", Helvetica, sans-serif;
+$text-color-dark: #FFF;
+$invalid-color: rgba(#FF0000, 0.3);
+$dropdow-button-width: 25px;
+
+$active-background-field: #FFF;
+$active-text-color-field: #000;
+
+$dark-base-back: #000;
+$dark-base-front: #FFF;
+$dark-text-primary-color: rgba($dark-base-front, 0.7);
+$dark-text-secondary-color: rgba($dark-base-front, 0.4);
+$dark-text-disabled-color: rgba($dark-base-front, 0.2);
+$dark-background-color: rgba($dark-base-back, 0.3);
+$dark-background-disabled-color: rgba($dark-base-back, 0.2);
+$dark-border-color: rgba($dark-base-back, 0.7);
+$dark-rule-main: rgba($dark-base-back, 0.24);
+$dark-rule-shadow: rgba($dark-base-front, 0.12);
+@mixin dark-gradient {
+  @include background-image(linear-gradient(to bottom, rgba($dark-base-front, 0.17), rgba($dark-base-front, 0.04)));
+
+  &:active, &:focus {
+    outline: 0;
+  }
+
+  &:active {
+    background-color: rgba($dark-base-back, 0.8);
+  }
+}
+
+$light-base-back: #FFF;
+$light-base-front: #000;
+$light-text-primary-color: rgba($light-base-front, 0.7);
+$light-text-secondary-color: rgba($light-base-front, 0.4);
+$light-text-disabled-color: rgba($light-base-front, 0.2);
+$light-background-color: $light-base-back;
+$light-background-disabled-color: rgba($light-base-back, 0.2);
+$light-border-color: rgba($light-base-front, 0.45);
+$light-rule-main: rgba($light-base-front, 0.24);
+$light-rule-shadow: rgba($light-base-back, 0.12);
+@mixin light-gradient {
+  @include background-image(linear-gradient(to bottom, rgba($light-base-back, 0.80), rgba($light-base-back, 0.22)));
+
+  &:active, &:focus {
+    outline: 0;
+  }
+
+  &:active {
+    background-color: rgba($light-base-front, 0.2);
+  }
+}
+
+body {
+  margin: 8px;
+  padding: 0;
+  border-width: 0;
+  font-family: $font-family;
+  font-size: $font-size;
+  background-repeat: no-repeat;
+  letter-spacing: 0.09em;
+
+  &.light {
+    color: $light-text-primary-color;
+  }
+
+  &.dark {
+    color: $dark-text-primary-color;
+  }
+
+  //background-image: url(../images/bg.png);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  height: 32px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  background-color: inherit;
+  cursor: pointer;
+  margin-top: 6px;
+  font-family: $font-family;
+  @include user-select(none);
+
+  &[disabled*=disabled] {
+    cursor: default;
+  }
+
+  .light & {
+    color: $light-text-primary-color;
+    border-color: $light-border-color;
+    @include light-gradient;
+
+    &[disabled*=disabled] {
+      background-image: none;
+      color: $light-text-disabled-color;
+      border-color: $light-text-disabled-color;
+    }
+  }
+
+  .dark & {
+    color: $dark-text-primary-color;
+    border-color: $dark-border-color;
+    @include dark-gradient;
+
+    &[disabled*=disabled] {
+      background-image: none;
+      color: $dark-text-disabled-color;
+    }
+  }
+}
+
+div.centered {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 45%;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  &#loading {
+    background-size: 124px 103px;
+    height: 129px;
+    margin-top: -65px;
+
+    .light & {
+      background-image: url(../images/loading_forBright.png);
+    }
+
+    .dark & {
+      background-image: url(../images/loading_forDark.png);
+    }
+  }
+
+  &#offline {
+    display: none;
+    background-size: 81px 70px;
+    height: 152px;
+    margin-top: -76px;
+
+    p {
+      bottom: auto;
+      top: 90px;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -40%;
+      width: 80%;
+    }
+
+    .light & {
+      background-image: url(../images/error_forBright.png);
+    }
+
+    .dark & {
+      background-image: url(../images/error_forDark.png);
+    }
+  }
+}
+
+#main {
+  display: none;
+
+  #header {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    @include user-select(none);
+
+    .light & {
+      border-color: $light-rule-main;
+    }
+
+    .dark & {
+      border-color: $dark-rule-main;
+    }
+
+    h1 {
+      display: inline-block;
+      width: 35px;
+      height: 21px;
+      overflow: hidden;
+      text-indent: -99999px;
+      margin: 5px 0 9px 5px;
+      background-repeat: no-repeat;
+      background-size: 35px 22px;
+
+      .light & {
+        background-image: url(../images/logo_forBright.png);
+      }
+
+      .dark & {
+        background-image: url(../images/logo_forDark.png);
+      }
+    }
+
+    p.meta {
+      float: right;
+      text-align: right;
+      font-size: $font-size - 2;
+      padding: 9px 3px 0 0;
+
+      .light & {
+        color: $light-text-secondary-color;
+      }
+
+      .dark & {
+        color: $dark-text-secondary-color;
+      }
+    }
+  }
+
+  #form {
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    padding: 9px 0 0 0;
+
+    .light & {
+      border-color: $light-rule-shadow;
+    }
+
+    .dark & {
+      border-color: $dark-rule-shadow;
+    }
+
+    p {
+      padding-bottom: 2px;
+
+      select, button {
+        width: 100%;
+      }
+
+      label {
+        font-size: $font-size;
+        padding-left: 2px;
+        @include user-select(none);
+
+        .light & {
+          color: $light-text-primary-color;
+        }
+
+        .dark & {
+          color: $dark-text-primary-color
+        }
+      }
+
+      .scombobox {
+        margin: 3px 0 7px;
+
+        input {
+          padding: 5px 7px;
+          border-width: 1px;
+          border-style: solid;
+          font-size: $font-size;
+          font-family: $font-family;
+
+          .light & {
+            color: $light-text-primary-color;
+            background-color: $light-background-color;
+            border-color: $light-border-color;
+          }
+
+          .dark & {
+            color: $dark-text-primary-color;
+            background-color: $dark-background-color;
+            border-color: $dark-border-color;
+          }
+
+          &.scombobox-invalid {
+            background-color: $invalid-color;
+          }
+
+          &:focus, &:active {
+            outline-width: 1px;
+            outline-style: solid;
+            background-color: $active-background-field;
+            color: $active-text-color-field;
+          }
+        }
+
+        .scombobox-dropdown-background {
+          background: inherit;
+          border-width: 1px;
+          border-style: solid;
+          width: $dropdow-button-width;
+
+          .light & {
+            border-color: $light-border-color;
+            @include light-gradient;
+          }
+
+          .dark & {
+            border-color: $dark-border-color;
+            @include dark-gradient;
+          }
+        }
+
+        .scombobox-dropdown-arrow {
+          width: $dropdow-button-width;
+        }
+
+        &.scombobox-disabled {
+          input {
+
+            .light & {
+              color: $light-text-disabled-color;
+              background-color: $light-background-disabled-color;
+              border-color: $light-text-disabled-color;
+
+              @include input-placeholder {
+                color: $light-text-disabled-color;
+              }
+            }
+
+            .dark & {
+              color: $dark-text-disabled-color;
+              background-color: $dark-background-disabled-color;
+
+              @include input-placeholder {
+                color: $dark-text-disabled-color;
+              }
+            }
+          }
+          .scombobox-dropdown-background {
+            background-image: none;
+            cursor: default;
+
+            .light & {
+              border-color: rgba($light-text-disabled-color, 0.1);
+            }
+
+            .dark & {
+
+            }
+          }
+        }
+
+        .scombobox-list {
+          color: #000;
+          border-radius: 2px;
+          max-height: 200px;
+
+          p {
+            padding: 5px 7px;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  p.help {
+    text-align: center;
+    margin-top: 10px;
+    @include user-select(none);
+  }
+}
